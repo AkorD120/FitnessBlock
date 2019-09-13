@@ -37,6 +37,8 @@ namespace FitnessBlock.BL.Model
         /// Рост.
         /// </summary>
         public double Height { get; set; }
+
+        public int Age { get { return DateTime.Now.Year - BirthDate.Year; } }
         #endregion
 
         /// <summary>
@@ -89,9 +91,19 @@ namespace FitnessBlock.BL.Model
             Height = height;
         }
 
+        public User(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("Имя пользователя не можеть быть пустым или null.", nameof(name));
+            }
+
+            Name = name;
+        }
+
         public override string ToString()
         {
-            return Name;
+            return Name + " " + Age;
         }
     }
 }
